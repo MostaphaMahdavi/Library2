@@ -1,0 +1,26 @@
+﻿#searchInput {
+    width: 500px !important;
+    height: 50px !important;
+    border-radius: 22px !important;
+}
+
+.input-validation-error {
+    box-shadow: 5px 5px 5px 2px tomato;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+#img {
+    width: 150px;
+    height: 150px
+}
+
+.card {
+    min-height: 600px;
+}
+
+#imgBook {
+    width: 200px !important;
+}

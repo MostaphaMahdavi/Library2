@@ -1,0 +1,19 @@
+﻿#imgUser {
+    width: 200px;
+}
+
+#imgGrid {
+    width: 170px;
+    height: 170px;
+           
+}
+
+
+.input-validation-error {
+     
+    box-shadow: 5px 5px 5px 2px tomato;
+}
+
+.field-validation-error {
+    color: red;
+}

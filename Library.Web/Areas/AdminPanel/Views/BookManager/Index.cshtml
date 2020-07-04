@@ -1,0 +1,141 @@
+﻿@model List<Library.Domains.Books.Entities.Book>
+@{
+    ViewData["Title"] = "Index";
+    int row = 0;
+}
+
+
+
+
+
+<section id="column-selectors">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        لیست کتاب ها
+                    </h4>
+                    <div class="actions action-btns">
+                        <div class="dt-buttons btn-group">
+                            <a asp-action="AddBook" class="btn btn-outline-primary waves-effect waves-light" tabindex="0" aria-controls="DataTables_Table_0">
+                                <span><i class="feather icon-plus"></i>  افزودن کتاب جدید</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+
+                    
+                    <div class="card-body card-dashboard">
+
+                        <div class="table-responsive">
+                            <div id="DataTables_Table_4_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+
+                                <table class="table table-striped dataex-html5-selectors dataTable" id="DataTables_Table_4" role="grid" aria-describedby="DataTables_Table_4_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ردیف: activate to sort column descending" style="width: 165px;">ردیف</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-sort="ascending" aria-label=" نام کتاب:  activate to sort column descending" style="width: 165px;">نام کتاب</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-sort="ascending" aria-label="موضوع: activate to sort column descending" style="width: 165px;">موضوع</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="کد شابک: activate to sort column ascending" style="width: 142px;">کد شابک</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="تصویر : activate to sort column ascending" style="width: 117px;">تصویر </th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_4" rowspan="1" colspan="1" aria-label="عملیات : activate to sort column ascending" style="width: 117px;">عملیات </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        @if (!Model.Any())
+                                        {
+                                            <tr>کاربری وارد نشده است</tr>
+                                        }
+
+                                        else
+                                        {
+                                            @foreach (var book in Model)
+                                            {
+                                                row += 1;
+
+                                                <tr role="row" class='@((row % 2 == 0 ? "even" : "odd"))' >
+
+                                                    <td class="sorting_1">@row</td>
+                                                    <td>@book.BookName</td>
+                                                    <td>@book.Subject</td>
+                                                    <td>@book.ShabekNo</td>
+
+
+                                                    <td>
+                                                        <img src="/Images/@book.ImageName" class="imgInGrid" id="imgGrid" />
+                                                    </td>
+
+                                                    <td>
+
+                                                        <a onClick="ChangeStatusUser('@book.BookName','@book.BookId')">
+                                                            <div class="fonticon-container">
+                                                                <div class="fonticon-wrap"><i class="fa fa-trash"></i></div>
+
+                                                            </div>
+                                                        </a>
+
+                                                        <a asp-action="EditBook" asp-route-BookId="@book.BookId">
+                                                            <div class="fonticon-container">
+                                                                <div class="fonticon-wrap"><i class="fa fa-pencil"></i></div>
+
+                                                            </div>
+                                                        </a>
+
+
+                                                    </td>
+                                                </tr>
+
+
+                                                }
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Modal -->
+        <div id="modal" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div id="contentPartial"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @*@section Scripts{
+
+                <script>
+
+                    function ChangeStatusUser(userName, isActive, fName, lName) {
+
+                        $.ajax({
+                            type:'get',
+                            url: '/AdminPanel/UserManager/ActiveOrDeActiveUser',
+                            data: {userName:userName,isActive:isActive,firstName:fName,lastName:lName}
+
+                        }).done(function (res) {
+                            $('#modal').modal('show');
+                            $("#contentPartial").html(res);
+                        });
+
+                    }
+                </script>
+            }*@

@@ -1,0 +1,25 @@
+﻿@model SearchViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    
+
+    <div class="d-flex justify-content-center">
+        <div class="col col-10">
+            <form asp-action="ListSearch" method="get">
+                <br />
+             
+                <input type="text" asp-for="SearchName" name="SearchName" id="searchInput" />
+                <br /> 
+                <span asp-validation-for="SearchName"></span>
+                <br />  <br />
+                <input type="submit" class="btn btn-outline-info" value="بگرد" />
+            </form>
+        </div>
+    </div>
+
+</div>
+
+

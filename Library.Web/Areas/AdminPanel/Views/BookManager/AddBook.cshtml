@@ -1,0 +1,144 @@
+﻿@model AddBookViewModel
+@{
+    ViewData["Title"] = "AddUser";
+}
+
+
+
+
+<section class="input-validation">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">افزودن کتاب جدید</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form class="form-horizontal" method="post" asp-action="AddBook" enctype='multipart/form-data'>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span asp-validation-for="BookName"></span>
+
+                                        <div class="controls">
+                                            <input type="text" asp-for="BookName" class="form-control"
+                                                   placeholder="نام کتاب">
+                                            <div class="help-block"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span asp-validation-for="Subject"></span>
+                                        <div class="controls">
+                                            <input type="text" asp-for="Subject"
+                                                   class="form-control"
+                                                   placeholder="موضوع  ">
+                                            <div class="help-block"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span asp-validation-for="ShabekNo"></span>
+                                        <div class="controls">
+                                            <input type="text" asp-for="ShabekNo" id="ShabekNo" class="form-control"
+                                                   placeholder="کد شابک">
+                                            <div class="help-block"></div>
+                                        </div>
+                                    </div>
+                               
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <span asp-validation-for="Content"></span>
+                                        <div class="controls">
+
+                                            <textarea type="text" rows="4" asp-for="Content"
+                                                      class="form-control"
+                                                      placeholder=" متن"></textarea>
+                                            <div class="help-block"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+
+                                                <div class="controls">
+                                                    <input type="file" asp-for="ImageName" id="imgFile" name="imagePath"
+                                                           placeholder="تصویر">
+                                                    <div class="help-block"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <img class="imgForm" id="imgUser" src="/Images/BookDefault.jpg" />
+                                        </div>
+
+
+                                    </div>
+                                
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">ارسال</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts
+{
+
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+
+                    $('#imgUser').attr('src', e.target.result);
+
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#imgFile").change(function() {
+            readURL(this);
+        });
+
+
+    </script>
+
+
+
+
+
+    <script>
+
+        $("#ShabekNo").on('keyup', function(event) {
+            var pattern = /^[a-zA-Z0-9]*$/;
+
+            if (!pattern.test(event.key)) {
+                $("#ShabekNo").val('');
+            }
+
+
+        });
+
+    </script>
+
+}
+
+
+
+
+
+
