@@ -7,5 +7,6 @@ namespace Library.Domains.Books.Repositories
     public interface IBookRepositoryCommand
     {
         Task AddBook(AddBookInfo book);
+
     }
 }
