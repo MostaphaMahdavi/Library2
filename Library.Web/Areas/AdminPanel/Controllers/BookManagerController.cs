@@ -60,16 +60,9 @@ namespace Library.Web.Areas.AdminPanel.Controllers
                     imagePath.CopyTo(stream);
                 }
 
-
-
             }
 
-
-            if (!ModelState.IsValid)
-            {
-                return View(book);
-            }
-
+ 
 
             var query = new AddBookInfo()
             {
