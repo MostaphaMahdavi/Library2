@@ -1,7 +1,7 @@
 ﻿using Library.Domains.Enums;
 using MediatR;
 
-namespace Library.Domains.Books.Dtos
+namespace Library.Domains.Books.Commands
 {
     public class AddBookInfo:IRequest<ResultStatusType>
     {

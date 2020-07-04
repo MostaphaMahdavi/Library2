@@ -1,13 +1,14 @@
-﻿using System.IO;
-using AutoMapper;
+﻿using AutoMapper;
+using Library.Domains.Books.Commands;
+using Library.Domains.Books.Queries;
+using Library.Domains.Commons;
+using Library.Domains.Enums;
 using Library.Web.Books.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using System.Threading.Tasks;
-using Library.Domains.Books.Dtos;
-using Library.Domains.Commons;
-using Library.Domains.Enums;
 
 namespace Library.Web.Areas.AdminPanel.Controllers
 {
@@ -23,9 +24,9 @@ namespace Library.Web.Areas.AdminPanel.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var query=new GetAllBookInfo();
-            var bookList =await _mediator.Send(query);
-          
+            var query = new GetAllBookInfo();
+            var bookList = await _mediator.Send(query);
+
             return View(bookList);
         }
 
@@ -33,7 +34,7 @@ namespace Library.Web.Areas.AdminPanel.Controllers
         public async Task<IActionResult> AddBook()
         {
 
-           
+
             return View();
         }
 
@@ -62,7 +63,7 @@ namespace Library.Web.Areas.AdminPanel.Controllers
 
             }
 
- 
+
 
             var query = new AddBookInfo()
             {
@@ -73,7 +74,7 @@ namespace Library.Web.Areas.AdminPanel.Controllers
                 ImageName = imageName
             };
 
-            
+
 
             var res = await _mediator.Send(query);
 

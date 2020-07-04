@@ -82,6 +82,7 @@ namespace Library.Web
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 
             #endregion
@@ -93,7 +94,6 @@ namespace Library.Web
 
             services.AddScoped<IBookRepositoryCommand, BookRepositoryCommand>();
             services.AddScoped<IBookRepositoryQuery, BookRepositoryQuery>();
-            services.AddScoped<IAddBookService, AddBookService>();
 
             #endregion
 

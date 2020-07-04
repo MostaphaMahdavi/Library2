@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Library.Domains.Books.Dtos;
-using Library.Domains.Books.Entities;
+﻿using Library.Domains.Books.Entities;
+using Library.Domains.Books.Queries;
 using Library.Domains.Books.Repositories;
 using MediatR;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Library.Services.Books.Queries.Handlers
 {
-    
-    public class GetBookBySearchHandler:IRequestHandler<GetBookBySearch,List<Book>>
+
+    public class GetBookBySearchHandler : IRequestHandler<GetBookBySearch, List<Book>>
     {
-        private IBookRepositoryQuery _bookRepositoryQuery;
+        private readonly IBookRepositoryQuery _bookRepositoryQuery;
 
         public GetBookBySearchHandler(IBookRepositoryQuery bookRepositoryQuery)
         {

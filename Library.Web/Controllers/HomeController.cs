@@ -1,4 +1,4 @@
-﻿using Library.Domains.Books.Dtos;
+﻿using Library.Domains.Books.Queries;
 using Library.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

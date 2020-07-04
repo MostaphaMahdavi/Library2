@@ -1,5 +1,5 @@
-﻿using Library.Domains.Books.Dtos;
-using Library.Domains.Books.Entities;
+﻿using Library.Domains.Books.Entities;
+using Library.Domains.Books.Queries;
 using Library.Domains.Books.Repositories;
 using MediatR;
 using System.Collections.Generic;
