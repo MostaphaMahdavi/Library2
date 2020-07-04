@@ -11,10 +11,12 @@ using Library.DataAccessCommands.Context;
 using Library.DataAccessQueries.Books.Repositories;
 using Library.Domains.Books.Commands;
 using Library.Domains.Books.Entities;
+using Library.Domains.Books.Queries;
 using Library.Domains.Books.Repositories;
 using Library.Domains.Commons;
 using Library.Services.Books.Commands;
 using Library.Services.Books.Queries;
+using Library.Services.Books.Queries.Behaviors;
 using Library.Services.Books.Validators;
 using Library.Services.PipelineBehaviors;
 using MediatR;
@@ -83,6 +85,7 @@ namespace Library.Web
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<GetBookBySearch, List<Book>>), typeof(SearchBehavior<GetBookBySearch, List<Book>>));
 
 
             #endregion

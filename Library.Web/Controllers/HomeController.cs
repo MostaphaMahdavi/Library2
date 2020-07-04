@@ -27,8 +27,9 @@ namespace Library.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ListSearch(string SearchName)
         {
+            
 
-            if (!ModelState.IsValid)
+            if (string.IsNullOrEmpty(SearchName))
             {
 
                 ModelState.AddModelError("SearchName", "فیلد اجباری می باشد");
