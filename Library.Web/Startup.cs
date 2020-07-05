@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -14,20 +10,19 @@ using Library.Domains.Books.Entities;
 using Library.Domains.Books.Queries;
 using Library.Domains.Books.Repositories;
 using Library.Domains.Commons;
-using Library.Services.Books.Commands;
-using Library.Services.Books.Queries;
 using Library.Services.Books.Queries.Behaviors;
 using Library.Services.Books.Validators;
 using Library.Services.PipelineBehaviors;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using System;
+using System.Collections.Generic;
 
 namespace Library.Web
 {
@@ -80,11 +75,13 @@ namespace Library.Web
 
             services.AddMvc().AddFluentValidation();
             services.AddTransient<IValidator<Book>, BookValidations>();
+            services.AddTransient<IValidator<AddBookInfo>, AddBookInfoValidation>();
 
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+            //   services.AddTransient(typeof(IPipelineBehavior<AddBookInfo, ResultStatusType>), typeof(AddBookInfoValid<AddBookInfo,ResultStatusType>));
             services.AddTransient(typeof(IPipelineBehavior<GetBookBySearch, List<Book>>), typeof(SearchBehavior<GetBookBySearch, List<Book>>));
 
 
@@ -94,7 +91,6 @@ namespace Library.Web
             #region IOC
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddScoped<IBookRepositoryCommand, BookRepositoryCommand>();
             services.AddScoped<IBookRepositoryQuery, BookRepositoryQuery>();
 
@@ -108,6 +104,8 @@ namespace Library.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+
             }
             else
             {
@@ -117,17 +115,12 @@ namespace Library.Web
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseStatusCodePages();
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-
-
                 //AdminPanel
-
                 endpoints.MapAreaControllerRoute(
                     "AdminPanel",
                     "AdminPanel",

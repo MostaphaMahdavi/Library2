@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Web.Books.ViewModels
 {
     public class AddBookViewModel
     {
 
-
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
-        [MaxLength(250, ErrorMessage = "حداکثر {0} کاراکتر وارد نمایید")]
         [Display(Name = "نام کتاب")]
+        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
+        [MaxLength(250,ErrorMessage = "طول فیلد {0} باید حداکثر {1} باشد")]
         public string BookName { get; set; }
 
 
@@ -16,23 +16,21 @@ namespace Library.Web.Books.ViewModels
         public string ImageName { get; set; }
 
 
-
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
-        [MaxLength(250, ErrorMessage = "حداکثر {0} کاراکتر وارد نمایید")]
         [Display(Name = "موضوع کتاب")]
+        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
+        [MaxLength(250,ErrorMessage = "طول فیلد {0} باید حداکثر {1} باشد")]
         public string Subject { get; set; }
 
 
-
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
-        [MaxLength(100, ErrorMessage = "حداکثر {0} کاراکتر وارد نمایید")]
         [Display(Name = "شماره شابک")]
+        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
+        [MaxLength(100,ErrorMessage = "طول فیلد {0} باید حداکثر {1} باشد")]
+        [Remote("CheckShabek","Home",ErrorMessage = "{0} تکراری می باشد")]
         public string ShabekNo { get; set; }
 
 
-
-        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
         [Display(Name = "متن کتاب")]
+        [Required(ErrorMessage = "فیلد {0} اجباری می باشد")]
         public string Content { get; set; }
     }
 }

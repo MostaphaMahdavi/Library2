@@ -17,18 +17,14 @@ namespace Library.DataAccessCommands.Books.Repositories
             _context = context;
             
         }
-        public async Task AddBook(AddBookInfo book)
+        public async Task AddBook(Book book)
         {
-           
-            Book bookMap=new Book()
-            {
-                BookName = book.BookName,
-                ShabekNo = book.ShabekNo,
-                Subject = book.Subject,
-                ImageName = book.ImageName,
-                Content = book.Content
-            };
-            await _context.Books.AddAsync(bookMap);
+            await _context.Books.AddAsync(book);
+        }
+
+        public void DeleteBook(Book book)
+        {
+            _context.Books.Remove(book);
         }
     }
 }

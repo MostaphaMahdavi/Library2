@@ -1,6 +1,7 @@
 ﻿using Library.Domains.Books.Queries;
 using Library.Web.Models;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -11,7 +12,6 @@ namespace Library.Web.Controllers
     {
 
         private readonly IMediator _mediator;
-
         public HomeController(IMediator mediator)
         {
             _mediator = mediator;
@@ -23,11 +23,12 @@ namespace Library.Web.Controllers
         }
 
 
+        #region ListSearch
 
         [HttpGet]
         public async Task<IActionResult> ListSearch(string SearchName)
         {
-            
+
 
             if (string.IsNullOrEmpty(SearchName))
             {
@@ -47,7 +48,10 @@ namespace Library.Web.Controllers
             return View(result);
         }
 
+        #endregion
 
+
+        #region ReadBook
 
         [HttpGet]
         public async Task<IActionResult> ReadBook(int bookId)
@@ -59,7 +63,19 @@ namespace Library.Web.Controllers
         }
 
 
+        #endregion
 
+
+
+        #region CheckShabek
+
+        public async Task<bool> CheckShabek(string ShabekNo)
+        {
+            var result = await _mediator.Send(new GetShabekByShabekId(ShabekNo));
+            return result is true ? true : false;
+        }
+
+        #endregion
 
 
         public IActionResult Privacy()

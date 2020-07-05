@@ -15,13 +15,14 @@ namespace Library.Web.Areas.AdminPanel.Controllers
     public class BookManagerController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
-
-        public BookManagerController(IMediator mediator, IMapper mapper)
+        public BookManagerController(IMediator mediator)
         {
             _mediator = mediator;
-            _mapper = mapper;
+
         }
+
+        #region Index
+
         public async Task<IActionResult> Index()
         {
             var query = new GetAllBookInfo();
@@ -30,11 +31,12 @@ namespace Library.Web.Areas.AdminPanel.Controllers
             return View(bookList);
         }
 
+        #endregion
 
-        public async Task<IActionResult> AddBook()
+        #region AddBook
+
+        public IActionResult AddBook()
         {
-
-
             return View();
         }
 
@@ -43,7 +45,6 @@ namespace Library.Web.Areas.AdminPanel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddBook(AddBookViewModel book, IFormFile imagePath)
         {
-
             var imageName = "BookDefault.jpg";
 
             if (imagePath == null)
@@ -64,7 +65,6 @@ namespace Library.Web.Areas.AdminPanel.Controllers
             }
 
 
-
             var query = new AddBookInfo()
             {
                 ShabekNo = book.ShabekNo,
@@ -73,8 +73,6 @@ namespace Library.Web.Areas.AdminPanel.Controllers
                 Content = book.Content,
                 ImageName = imageName
             };
-
-
 
             var res = await _mediator.Send(query);
 
@@ -90,12 +88,38 @@ namespace Library.Web.Areas.AdminPanel.Controllers
         }
 
 
+        #endregion
+
+        #region DeleteBook
+
+        public async Task<IActionResult> DeleteBook(int bookId, string bookName)
+        {
+            var book = await _mediator.Send(new GetBookByIdInfo(bookId));
+            return PartialView("_deleteBook", book);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBook(int bookId)
+        {
+           var res= await _mediator.Send(new DeleteBookInfo(bookId));
+           TempData["success"] = res;
+           return RedirectToAction("Index");
+
+        }
+
+        #endregion
+
+        #region EditBook
 
         public async Task<IActionResult> EditBook(int BookId)
         {
             ViewBag.bookId = BookId;
             return View();
         }
+
+        #endregion
 
     }
 }

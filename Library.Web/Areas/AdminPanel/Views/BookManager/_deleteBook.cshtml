@@ -1,0 +1,38 @@
+﻿@model Library.Domains.Books.Entities.Book
+
+
+<div class="modal-header bg-danger white">
+    <h5 class="modal-title" id="myModalLabel110">
+
+        <span> @Model.BookName</span>
+
+    </h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+
+
+    <div class="d-flex justify-content-between">
+
+
+    </div>
+
+    <hr />
+    <span class="text-primary"> آیا نسبت به حذف کتاب @Model.BookName اطمینان دارید؟ </span>
+</div>
+<div class="modal-footer">
+
+    <form asp-action="DeleteBook" method="post">
+        <input type="hidden" name="bookId" value="@Model.BookId" />
+
+        <button class="btn btn-dark waves-effect waves-light" data-dismiss="modal">بازگشت </button>
+
+        <button type="submit" class="btn btn-info waves-effect waves-light">تایید </button>
+
+
+
+    </form>
+
+</div>

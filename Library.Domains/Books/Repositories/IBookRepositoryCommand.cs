@@ -6,7 +6,8 @@ namespace Library.Domains.Books.Repositories
 {
     public interface IBookRepositoryCommand
     {
-        Task AddBook(AddBookInfo book);
+        Task AddBook(Book book);
+        void DeleteBook(Book book);
 
     }
 }

@@ -32,5 +32,11 @@ namespace Library.DataAccessQueries.Books.Repositories
         {
             return await _db.QueryFirstOrDefaultAsync<Book>("select * from books where bookId=@bookId", new { @bookId = bookId });
         }
+
+        public async Task<bool> CheckShabek(string shabekNo)
+        {
+            int shabek = await _db.QueryFirstOrDefaultAsync<int>("select count(*) from books where ShabekNo=@shabekNo", new { @shabekNo = shabekNo });
+            return shabek > 0 ? false : true;
+        }
     }
 }

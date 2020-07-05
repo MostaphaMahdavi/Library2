@@ -23,9 +23,19 @@
                             </a>
                         </div>
                     </div>
+             
                 </div>
                 <div class="card-content">
-
+                
+                    
+                    @if (TempData["success"] is true)
+                    {
+                        <div>
+                            <span class="text-success">
+                                حذف کتاب با موفقیت انجام شد.
+                            </span>
+                        </div>
+                    }
                     
                     <div class="card-body card-dashboard">
 
@@ -72,7 +82,7 @@
 
                                                     <td>
 
-                                                        <a onClick="ChangeStatusUser('@book.BookName','@book.BookId')">
+                                                        <a onClick="DeleteBook('@book.BookId','@book.BookName')">
                                                             <div class="fonticon-container">
                                                                 <div class="fonticon-wrap"><i class="fa fa-trash"></i></div>
 
@@ -120,16 +130,16 @@
 
 
 
-        @*@section Scripts{
+        @section Scripts{
 
                 <script>
 
-                    function ChangeStatusUser(userName, isActive, fName, lName) {
+                    function DeleteBook(bookId,bookName) {
 
                         $.ajax({
                             type:'get',
-                            url: '/AdminPanel/UserManager/ActiveOrDeActiveUser',
-                            data: {userName:userName,isActive:isActive,firstName:fName,lastName:lName}
+                            url: '/AdminPanel/BookManager/DeleteBook',
+                            data: {bookId:bookId,bookName:bookName}
 
                         }).done(function (res) {
                             $('#modal').modal('show');
@@ -138,4 +148,4 @@
 
                     }
                 </script>
-            }*@
+            }

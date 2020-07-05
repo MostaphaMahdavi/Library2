@@ -8,8 +8,4 @@
     <PackageReference Include="MediatR" Version="8.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Books\Dtos\" />
-  </ItemGroup>
-
 </Project>

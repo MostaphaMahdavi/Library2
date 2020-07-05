@@ -8,7 +8,7 @@ namespace Library.Domains.Books.Repositories
     {
         Task<List<Book>> GetAllBook();
         Task<List<Book>> GetBookBySearch(string search);
-
         Task<Book> GetBookById(int bookId);
+        Task<bool> CheckShabek(string shabekNo);
     }
 }
